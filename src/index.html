@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>魔法攻撃のつくりかた</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{ "imports": { "three": "../node_modules/three/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <canvas id="gl" width="1080" height="1920"></canvas>
+  <div id="ui">
+    <div id="header">
+      <div id="title-small"></div>
+      <div id="title-big"></div>
+      <svg id="underline" width="720" height="30" viewBox="0 0 720 30"><path d="" /></svg>
+    </div>
+    <div id="step-label"><span class="num"></span><span class="name"></span></div>
+    <svg id="divider" width="760" height="30" viewBox="0 0 760 30"><path d="" /></svg>
+    <div id="layer"></div>
+    <div id="dots"></div>
+    <svg id="bookmark" width="90" height="120" viewBox="0 0 90 120"><path d="M8 6 H82 V112 L45 84 L8 112 Z" /></svg>
+  </div>
+  <div id="fade"></div>
+</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

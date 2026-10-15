@@ -1,0 +1,17 @@
+{
+  "name": "videocreater",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "node scripts/serve.js",
+    "render": "node scripts/render.js",
+    "audio": "python3 scripts/make_audio.py",
+    "build": "node scripts/render.js && python3 scripts/make_audio.py && node scripts/mux.js"
+  },
+  "dependencies": {
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}
