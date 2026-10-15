@@ -377,7 +377,7 @@ class World {
         }
 
         // 8. ダメージ数値
-        if (f.has('numbers') && sinceHit < 1.0) {
+        if (f.has('numbers') && this.name === 'main' && sinceHit < 1.0) {
           this.ui.dmg.push({ value: a.dmg, crit: !!a.crit, age: sinceHit });
         }
       }
@@ -538,7 +538,7 @@ for (let i = 0; i < 8; i++) {
   dotsEl.appendChild(d);
 }
 
-const CAPTION_Y = { main: 1130, introTop: 845, introBottom: 1480 };
+const CAPTION_Y = { main: 1175, introTop: 845, introBottom: 1480 };
 
 function caption(c, t) {
   if (t < c.at || t >= c.until) return '';
@@ -575,11 +575,11 @@ function popScale(age, from = 1.7) {
 function worldUI(world) {
   let html = hpBar(world, ENEMY.clone().add(new THREE.Vector3(0, CAP_H + 0.45, 0)));
   for (const d of world.ui.dmg) {
-    const p = world.project(ENEMY.clone().add(new THREE.Vector3(0.15, CAP_H + 0.75, 0)));
-    const y = p.y - easeOut(d.age / 0.9) * 70;
+    const p = world.project(ENEMY.clone().add(new THREE.Vector3(-0.75, CAP_H - 0.05, 0.1)));
+    const y = p.y - easeOut(d.age / 0.9) * 50;
     const op = clamp((1 - d.age) / 0.3);
     const tag = d.crit ? '<span class="tag">クリティカル！</span>' : '';
-    html += `<div class="dmg${d.crit ? ' crit' : ''}" style="left:${p.x}px;top:${y - (d.crit ? 150 : 64)}px;opacity:${op};transform:scale(${popScale(d.age, d.crit ? 2.2 : 1.7)})">${tag}${d.value}</div>`;
+    html += `<div class="dmg${d.crit ? ' crit' : ''}" style="left:${p.x}px;top:${y - (d.crit ? 70 : 56)}px;opacity:${op};transform:scale(${popScale(d.age, d.crit ? 2.2 : 1.7)})">${tag}${d.value}</div>`;
   }
   for (const s of world.ui.sfx) {
     const isBoom = s.kind === 'boom';
@@ -589,8 +589,9 @@ function worldUI(world) {
     const op = clamp((life - s.age) / 0.2);
     const jitter = isBoom ? Math.sin(s.age * 90) * 6 * Math.exp(-s.age * 6) : 0;
     const rot = isBoom ? 8 : -12;
-    const scaleMul = world.name === 'main' ? 1 : 0.7;
-    html += `<div class="sfx ${s.kind}" style="left:${p.x + jitter + (isBoom ? 60 : -30)}px;top:${p.y - (isBoom ? 150 : 90) - s.age * 30}px;opacity:${op};transform:rotate(${rot}deg) scale(${popScale(s.age) * scaleMul})">${isBoom ? 'ドーン！' : 'ヒュッ！'}</div>`;
+    const main = world.name === 'main';
+    const scaleMul = main ? 1 : 0.65;
+    html += `<div class="sfx ${s.kind}" style="left:${p.x + jitter + (isBoom ? 60 : -30)}px;top:${p.y - (isBoom ? (main ? 150 : 70) : (main ? 90 : 60)) - s.age * 30}px;opacity:${op};transform:rotate(${rot}deg) scale(${popScale(s.age) * scaleMul})">${isBoom ? 'ドーン！' : 'ヒュッ！'}</div>`;
   }
   return html;
 }
@@ -665,7 +666,7 @@ function renderAt(t) {
     const w = worlds.main;
     w.lastT = t;
     w.update(t);
-    w.render(MAIN, { hfov: 41, centerY: 0.43, dist: 1.0 });
+    w.render(MAIN, { hfov: 41, centerY: 0.465, dist: 1.0 });
   }
   renderUI(t);
 }

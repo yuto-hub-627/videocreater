@@ -56,9 +56,9 @@ export function attacks() {
   const all = new Set(FEATURES);
   const list = [];
   // イントロ：上は演出なし、下はフル演出
-  for (const start of [0.35, 2.6]) {
+  for (const [start, dmg] of [[0.35, 27], [2.6, 31]]) {
     list.push({ world: 'top', seg: 'intro', start, features: new Set(), dmg: 0 });
-    list.push({ world: 'bottom', seg: 'intro', start, features: all, dmg: 0, sound: true, sfxText: true });
+    list.push({ world: 'bottom', seg: 'intro', start, features: all, dmg, sound: true, sfxText: true });
   }
   STEPS.forEach((s, i) => {
     const t0 = STEPS_START + i * STEP_LEN;
