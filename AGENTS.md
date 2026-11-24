@@ -3,7 +3,7 @@
 <!-- knowledge ここから -->
 ## knowledge（中西悠仁のナレッジ）を使う
 
-この作業の依頼主は中西悠仁。本人の情報と全体のルールは、GitHub の `yuto-hub-627/knowledge`（PC では `C:\Users\Nakanishi\knowledge`）にある。Claude・Codex など、どの AI もこれに従う。
+この作業の依頼主は中西悠仁。本人の情報と全体のルールは、GitHub の `yuto-hub-627/knowledge`（PC では `C:\Users\Nakanishi\.gemini\antigravity\scratch\knowledge-repo`）にある。Claude・Codex など、どの AI もこれに従う。
 
 **始めるとき**
 1. knowledge を最新にして（手元に無ければ clone か GitHub から）、`AGENTS.md` を読む。詳細は `index.md` で探し、必要なファイルだけ読む
